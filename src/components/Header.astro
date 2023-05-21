@@ -1,0 +1,10 @@
+---
+const { headingTitle } = Astro.props;
+---
+
+<header>
+    <nav>
+        <a href="/">Inicio</a>
+    </nav>
+    {headingTitle && <h1>{headingTitle}</h1>}
+</header>
