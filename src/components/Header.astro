@@ -1,10 +1,94 @@
----
-const { headingTitle } = Astro.props;
----
-
 <header>
-    <nav>
-        <a href="/">Inicio</a>
-    </nav>
-    {headingTitle && <h1>{headingTitle}</h1>}
+    <nav class="fixed w-full z-10 top-0">
+
+		<div id="progress" class="h-1 z-50 top-0 relative" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), #fff 0);"></div>
+
+		<div id="header" class="transition duration-500 ease-in-out transform translate-y-0 z-20">
+
+			<div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+
+				<div class="pl-4">
+					<a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="#">
+						Minimal Blog
+					</a>
+				</div>
+
+				<div class="block lg:hidden pr-4">
+					<button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-green-500 appearance-none focus:outline-none">
+						<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<title>Menu</title>
+							<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+						</svg>
+					</button>
+				</div>
+
+				<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
+					<ul class="list-reset lg:flex justify-end flex-1 items-center">
+						<li class="mr-3">
+							<a class="inline-block py-2 px-4 text-gray-900 font-bold no-underline" href="#">Active</a>
+						</li>
+						<li class="mr-3">
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+						</li>
+						<li class="mr-3">
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
 </header>
+
+<script>
+    // Variables to track scroll position
+    let lastScrollPos = 0;
+    const scrollUpThreshold = 500;
+
+    // Get elements
+    const [header, navcontent, progress, navToggle] = ['header', 'nav-content', 'progress', 'nav-toggle'].map(id => document.getElementById(id));
+
+    // Function to calculate scroll percentage
+    const calculateScrollPercentage = () => {
+        const { scrollTop: st, scrollHeight: sh, clientHeight } = document.documentElement;
+        return (st || document.body[st]) / ((sh || document.body[sh]) - clientHeight) * 100;
+    };
+
+    // Function to toggle classes based on scroll position
+    const toggleHeaderShadowOnScroll = scrollpos => {
+        if (scrollpos > 10) {
+            header.classList.add("bg-white", "shadow");
+            navcontent.classList.remove("bg-gray-100");
+            navcontent.classList.add("bg-white");
+        } else {
+            header.classList.remove("bg-white", "shadow");
+            navcontent.classList.remove("bg-white");
+            navcontent.classList.add("bg-gray-100");
+        }
+    };
+
+    // Function to hide or show menu based on scroll direction
+    const hideMenuOnScrollDown = scrollpos => {
+        if (scrollpos > lastScrollPos && scrollpos > scrollUpThreshold) {
+            // User is scrolling down, hide the menu
+            header.classList.add("-translate-y-full");
+        } else {
+            // User is scrolling up or is within 50px from top, show the menu
+            header.classList.remove("-translate-y-full");
+        }
+        lastScrollPos = scrollpos;
+    };
+
+    // Event listener for scroll
+    window.addEventListener('scroll', () => {
+        const scrollpos = window.scrollY;
+        progress.style.setProperty('--scroll', calculateScrollPercentage() + '%');
+        toggleHeaderShadowOnScroll(scrollpos);
+        hideMenuOnScrollDown(scrollpos);
+    });
+
+    // Event listener for nav toggle click
+    navToggle.addEventListener('click', () => {
+        navcontent.classList.toggle("hidden");
+    });
+</script>
