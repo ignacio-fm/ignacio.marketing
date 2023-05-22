@@ -9,7 +9,7 @@
 
 				<div class="pl-4">
 					<a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="#">
-						Minimal Blog
+						Ignacio Fernández
 					</a>
 				</div>
 
@@ -25,13 +25,19 @@
 				<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
 					<ul class="list-reset lg:flex justify-end flex-1 items-center">
 						<li class="mr-3">
-							<a class="inline-block py-2 px-4 text-gray-900 font-bold no-underline" href="#">Active</a>
+							<a class="inline-block py-2 px-4 text-gray-900 font-bold no-underline" href="#">
+                                Inicio
+                            </a>
 						</li>
 						<li class="mr-3">
-							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">
+                                link
+                            </a>
 						</li>
 						<li class="mr-3">
-							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">
+                                link
+                            </a>
 						</li>
 					</ul>
 				</div>
@@ -44,6 +50,7 @@
     // Variables to track scroll position
     let lastScrollPos = 0;
     const scrollUpThreshold = 500;
+    const scrollDownThreshold = 75;
 
     // Get elements
     const [header, navcontent, progress, navToggle] = ['header', 'nav-content', 'progress', 'nav-toggle'].map(id => document.getElementById(id));
@@ -56,27 +63,28 @@
 
     // Function to toggle classes based on scroll position
     const toggleHeaderShadowOnScroll = scrollpos => {
-        if (scrollpos > 10) {
-            header.classList.add("bg-white", "shadow");
-            navcontent.classList.remove("bg-gray-100");
-            navcontent.classList.add("bg-white");
-        } else {
-            header.classList.remove("bg-white", "shadow");
-            navcontent.classList.remove("bg-white");
-            navcontent.classList.add("bg-gray-100");
-        }
+        const scrollPassed = scrollpos > 10;
+        header.classList.toggle("bg-white", scrollPassed);
+        header.classList.toggle("shadow", scrollPassed);
+        navcontent.classList.toggle("bg-gray-100", !scrollPassed);
+        navcontent.classList.toggle("bg-white", scrollPassed);
     };
 
     // Function to hide or show menu based on scroll direction
-    const hideMenuOnScrollDown = scrollpos => {
-        if (scrollpos > lastScrollPos && scrollpos > scrollUpThreshold) {
-            // User is scrolling down, hide the menu
+    const hideMenuOnScroll = scrollpos => {
+        if (scrollpos > lastScrollPos + scrollDownThreshold) {
+            // User is scrolling down and has scrolled more than the threshold, hide the menu
             header.classList.add("-translate-y-full");
-        } else {
-            // User is scrolling up or is within 50px from top, show the menu
+            header.classList.remove("translate-y-0");
+            lastScrollPos = scrollpos - scrollDownThreshold; // update lastScrollPos
+        } else if (scrollpos < lastScrollPos) {
+            // User is scrolling up, show the menu
             header.classList.remove("-translate-y-full");
+            header.classList.add("translate-y-0");
+            if (scrollpos < lastScrollPos - scrollUpThreshold) {
+                lastScrollPos = scrollpos + scrollUpThreshold; // reset lastScrollPos
+            }
         }
-        lastScrollPos = scrollpos;
     };
 
     // Event listener for scroll
@@ -84,7 +92,7 @@
         const scrollpos = window.scrollY;
         progress.style.setProperty('--scroll', calculateScrollPercentage() + '%');
         toggleHeaderShadowOnScroll(scrollpos);
-        hideMenuOnScrollDown(scrollpos);
+        hideMenuOnScroll(scrollpos);
     });
 
     // Event listener for nav toggle click
