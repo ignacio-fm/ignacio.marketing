@@ -1,0 +1,43 @@
+---
+import { SEO } from 'astro-seo';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<SEO
+			title={frontmatter.title}
+			description={frontmatter.description}
+			openGraph={{
+				basic: {
+					title: frontmatter.title,
+					type: "article",
+					image: frontmatter.image,
+				},
+				article: {
+					publishedTime: frontmatter.publishedTime,
+					modifiedTime: frontmatter.modifiedTime,
+					expirationTime: frontmatter.expirationTime,
+					authors: frontmatter.authors,
+					tags: frontmatter.tags,
+				}
+			}}
+			extend={{
+				link: [{ rel: "icon", type:"image/svg+xml", href:"/favicon.svg" }]
+			}}
+		/>
+	</head>
+	<body>
+		<Header/>
+		<main class="container w-full md:max-w-3xl mx-auto pt-20">
+			<slot />
+		</main>
+		<Footer/>
+	</body>
+</html>
