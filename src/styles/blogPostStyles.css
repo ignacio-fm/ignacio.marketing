@@ -1,0 +1,41 @@
+/* blogPostStyles.css */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+hr {
+    @apply border-b-2 border-gray-400 mb-8 mx-4;
+}
+
+pre {
+    @apply bg-gray-900 rounded text-white font-mono text-base p-2 md:p-4;
+}
+
+pre code {
+    @apply break-words whitespace-pre-wrap;
+}
+
+h2, h3, h4, h5, h6 {
+    @apply py-2 font-sans;
+}
+
+p {
+    @apply py-6;
+}
+
+ol li {
+    @apply py-3;
+}
+
+a {
+    @apply text-green-500 no-underline;
+}
+
+a:hover {
+    @apply underline;
+}
+
+blockquote {
+    @apply border-l-4 border-green-500 italic my-8 pl-8 md:pl-12;
+}
