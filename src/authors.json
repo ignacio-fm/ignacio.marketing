@@ -1,0 +1,16 @@
+{
+    "Ignacio Fernández": {
+        "name": "Ignacio Fernández",
+        "image": "http://i.pravatar.cc/300",
+        "bio": "Marketing Specialist con experiencia en la implementación de estrategias SEO y SEM, trabajando actualmente en ",
+        "link": "https://seoseu.com",
+        "anchorText": "seoseu.com"
+    },
+    "Otro Autor": {
+        "name": "Otro Autor",
+        "image": "http://i.pravatar.cc/300",
+        "bio": "Otro lorem ipsum dolor sit amet.",
+        "link": "./",
+        "anchorText": "anchor text"
+    }
+}

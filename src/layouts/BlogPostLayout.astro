@@ -2,6 +2,9 @@
 import { SEO } from 'astro-seo';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PostTags from '../components/PostTags.astro';
+import PostNewsletterBanner from '../components/PostNewsletterBanner.astro'
+import PostAuthors from '../components/PostAuthors.astro';
 
 const { frontmatter } = Astro.props;
 
@@ -39,12 +42,17 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 	</head>
 	<body>
 		<Header/>
-		<main class="prose lg:prose-xl container w-full md:max-w-3xl mx-auto py-20">
-			<div class="font-sans">
+		<main class="container w-full md:max-w-3xl mx-auto py-20">
+			<div class="prose lg:prose-xl">
 				<h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl">{frontmatter.title}</h1>
 				<p class="text-sm md:text-base font-normal text-gray-600 mt-0">Publicado el {dateFormatted}</p>
+				<slot />
 			</div>
-			<slot />
+			<PostTags tags={frontmatter.tags} />
+			<hr class="border-b-2 border-gray-400 mb-8 mx-4">
+			<PostNewsletterBanner />
+			<PostAuthors authorsKeys={frontmatter.authors} />
+			<hr class="border-b-2 border-gray-400 mb-8 mx-4">
 		</main>
 		<Footer/>
 	</body>
