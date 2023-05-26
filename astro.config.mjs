@@ -6,6 +6,6 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ignacio.info',
+  site: 'https://ignacio.marketing',
   integrations: [tailwind(), sitemap(), mdx()]
 });
