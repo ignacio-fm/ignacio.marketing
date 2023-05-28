@@ -6,8 +6,7 @@
                 <div class="px-8">
                     <h3 class="font-bold text-gray-900">Sobre mí</h3>
                     <p class="py-4 text-gray-600 text-sm">
-                        Me llamo Ignacio Fernández, Marketing Specialist en Lleida.<br>
-                        <a class="text-green-500 no-underline hover:underline" href="/sobre-mi">Leer más sobre mí</a>.
+                        © Ignacio Fernández <span id="year"></span>
                     </p>
                 </div>
             </div>
@@ -56,3 +55,8 @@
         
     </div>
 </footer>
+
+<script>
+    let year = document.getElementById('year');
+    year.textContent = new Date().getFullYear().toString();
+</script>

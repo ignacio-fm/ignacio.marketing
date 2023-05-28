@@ -6,6 +6,7 @@ import PostTags from '../components/PostTags.astro';
 import PostNewsletterBanner from '../components/PostNewsletterBanner.astro'
 import PostAuthors from '../components/PostAuthors.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import PostPrevNextLinks from '../components/PostPrevNextLinks.astro';
 
 const { frontmatter, headings } = Astro.props;
 
@@ -20,13 +21,13 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<SEO
-			title={frontmatter.title}
-			description={frontmatter.description}
+			title={frontmatter.postTitle}
+			description={frontmatter.postDescription}
 			openGraph={{
 				basic: {
-					title: frontmatter.title,
+					title: frontmatter.postTitle,
 					type: "article",
-					image: frontmatter.image,
+					image: frontmatter.postImage,
 				},
 				article: {
 					publishedTime: frontmatter.publishedTime,
@@ -43,10 +44,11 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 	</head>
 	<body>
 		<Header/>
-		<main class="container w-full md:max-w-3xl mx-auto py-20">
+		<main class="container w-full md:max-w-6xl mx-auto pt-20">
 			<div class="w-full px-4 md:px-6 leading-normal">
-				<img class="rounded-md" src={frontmatter.image} alt=`Artículo: ${frontmatter.title}`>
-				<h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl">{frontmatter.title}</h1>
+				<img class="rounded-md" src={frontmatter.postImage} alt=`Artículo: ${frontmatter.postTitle}`>
+				<p class="text-base md:text-sm text-green-500 font-bold mt-3">&lt; <a href="../" class="text-base md:text-sm text-green-500 font-bold no-underline hover:underline">VOLVER AL BLOG</a></p>
+				<h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl">{frontmatter.postTitle}</h1>
 				<p class="text-sm md:text-base font-normal text-gray-600 pb-6">Publicado el {dateFormatted}</p>
 				<TableOfContents headings={headings} />
 				<article class="prose prose-lg lg:prose-xl">
@@ -58,6 +60,7 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 				<PostNewsletterBanner />
 				<PostAuthors authorsKeys={frontmatter.authors} />
 				<hr class="border-b-2 border-gray-400 mb-8 mx-4">
+				<PostPrevNextLinks />
 			</div>
 		</main>
 		<Footer/>

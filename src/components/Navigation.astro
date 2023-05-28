@@ -1,0 +1,109 @@
+---
+    const pathname = new URL(Astro.request.url).pathname;
+    const currentPath = pathname.slice(1);
+---
+
+<div id="progress-bar" class="h-1 z-50 top-0 relative" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), #fff 0);"></div>
+<div id="nav-container" class="transition duration-500 ease-in-out transform translate-y-0 z-20">
+    <div class="w-full md:max-w-6xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+
+        <div class="pl-4">
+            <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="../">
+                Ignacio Fernández
+            </a>
+        </div>
+
+        <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-green-500 appearance-none focus:outline-none">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                    <a
+                        class=`${currentPath === "" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900"} inline-block py-2 px-4`
+                        href="../"
+                    >
+                        Inicio
+                    </a>
+                </li>
+                <li class="mr-3">
+                    <a
+                        class=`${currentPath === "sobre-mi" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`
+                        href="../sobre-mi"
+                    >
+                        Sobre mí
+                    </a>
+                </li>
+                <li class="mr-3">
+                    <a
+                        class=`${currentPath === "blog" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`
+                        href="../blog"
+                    >
+                        Blog
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Variables to track scroll position
+    let lastScrollPos = 0;
+    const scrollUpThreshold = 500;
+    const scrollDownThreshold = 75;
+
+    // Get elements
+    const [navContainer, navContent, progressBar, navToggle] = ['nav-container', 'nav-content', 'progress-bar', 'nav-toggle'].map(id => document.getElementById(id));
+
+    // Function to calculate scroll percentage
+    const calculateScrollPercentage = () => {
+        const { scrollTop: st, scrollHeight: sh, clientHeight } = document.documentElement;
+        return (st || document.body[st]) / ((sh || document.body[sh]) - clientHeight) * 100;
+    };
+
+    // Function to toggle classes based on scroll position
+    const toggleHeaderShadowOnScroll = scrollpos => {
+        const scrollPassed = scrollpos > 10;
+        navContainer.classList.toggle("bg-white", scrollPassed);
+        navContainer.classList.toggle("shadow", scrollPassed);
+        navContent.classList.toggle("bg-gray-100", !scrollPassed);
+        navContent.classList.toggle("bg-white", scrollPassed);
+    };
+
+    // Function to hide or show menu based on scroll direction
+    const hideMenuOnScroll = scrollpos => {
+        if (scrollpos > lastScrollPos + scrollDownThreshold) {
+            // User is scrolling down and has scrolled more than the threshold, hide the menu
+            navContainer.classList.add("-translate-y-full");
+            navContainer.classList.remove("translate-y-0");
+            lastScrollPos = scrollpos - scrollDownThreshold; // update lastScrollPos
+        } else if (scrollpos < lastScrollPos) {
+            // User is scrolling up, show the menu
+            navContainer.classList.remove("-translate-y-full");
+            navContainer.classList.add("translate-y-0");
+            if (scrollpos < lastScrollPos - scrollUpThreshold) {
+                lastScrollPos = scrollpos + scrollUpThreshold; // reset lastScrollPos
+            }
+        }
+    };
+
+    // Event listener for scroll
+    window.addEventListener('scroll', () => {
+        const scrollpos = window.scrollY;
+        progressBar.style.setProperty('--scroll', calculateScrollPercentage() + '%');
+        toggleHeaderShadowOnScroll(scrollpos);
+        hideMenuOnScroll(scrollpos);
+    });
+
+    // Event listener for nav toggle click
+    navToggle.addEventListener('click', () => {
+        navContent.classList.toggle("hidden");
+    });
+</script>
