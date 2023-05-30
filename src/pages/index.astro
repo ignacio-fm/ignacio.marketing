@@ -1,5 +1,6 @@
 ---
 import Button from '../components/Button.astro';
+import HomePageHero from '../components/HomePageHero.astro';
 import Layout from '../layouts/Layout.astro';
 const posts = await Astro.glob('./posts/*.mdx');
 const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
@@ -11,28 +12,27 @@ const latestPost = sortedPosts[0];
 	pageDescription="Bienvenidos a mi blog personal, donde podrás conocerme un poco más y ver mis trabajos realizados."
 >
 
-	<section class="w-full px-4 md:px-6 py-20 text-xl text-gray-800 leading-normal">
-			<h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-4xl md:text-6xl">
-				Marketing<br>
-				Specialist
-			</h1>
-	</section>
+	<HomePageHero />
 
 	<section class="w-full px-4 md:px-6 pb-6 text-gray-800 leading-normal">
-		<div class="flex">
-			<div class="w-full lg:w-1/2">
-				<h1>{latestPost.frontmatter.postTitle}</h1>
+		<div class="block md:flex">
+			<div class="w-full lg:w-1/2 [&>p]:pb-3 [&>li]:pb-3">
+				<h1 class="text-2xl font-bold pb-3">{latestPost.frontmatter.postTitle}</h1>
 				<p>{latestPost.frontmatter.postDescription}</p>
 				<p>Publicado el {latestPost.frontmatter.publishedTime}</p>
-				<ul>
+				<ul class="flex pb-3">
 					{latestPost.frontmatter.tags.map((tag) => (
-						<li>{tag}</li>
+						<li>
+							<a href="#" class="me-2 border rounded-md px-2 py-1">{tag}</a>
+						</li>
 						))}
 				</ul>
-				<Button url="./" text="Leer el artículo" attrs="" />
+				<Button url={latestPost.url} text="Leer el artículo" attrs="" />
 			</div>
 			<div class="w-full lg:w-1/2">
-				<img class="" src={latestPost.frontmatter.postImage} alt={latestPost.frontmatter.postTitle}>
+				<a href={latestPost.url}>
+					<img class="rounded-lg" src={latestPost.frontmatter.postImage} alt={latestPost.frontmatter.postTitle}>
+				</a>
 			</div>
 		</div>
 	</section>

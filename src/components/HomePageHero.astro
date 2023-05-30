@@ -1,0 +1,32 @@
+<section class="w-full px-4 md:px-6 py-20 text-xl text-gray-800 leading-normal">
+    <h1 class="block h-[130px] font-bold font-sans break-normal text-gray-900 text-4xl md:text-6xl">
+        <span id="palabra1" class="absolute transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">Marketing</span><br>
+        <span id="palabra2" class="absolute transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">Specialist</span>
+    </h1>
+</section>
+
+<script>
+    let palabras1 = ["Marketing", "Branding", "Design"];
+    let palabras2 = ["Specialist", "Lover", "Enthusiast"];
+    let index = 0;
+
+    function cambiarPalabras() {
+      const palabra1 = document.getElementById('palabra1');
+      const palabra2 = document.getElementById('palabra2');
+      palabra1.className = "absolute transition-all duration-500 ease-in-out transform -translate-y-12 opacity-0";
+      palabra2.className = "absolute transition-all duration-500 ease-in-out transform -translate-y-12 opacity-0";
+  
+      setTimeout(() => {
+        index = (index + 1) % palabras1.length;
+        palabra1.innerText = palabras1[index];
+        palabra1.className = "absolute transition-all duration-500 ease-in-out transform translate-y-0 opacity-100";
+      }, 500);
+
+      setTimeout(() => {
+        palabra2.innerText = palabras2[index];
+        palabra2.className = "absolute transition-all duration-500 ease-in-out transform translate-y-0 opacity-100";
+      }, 1000);
+    }
+
+    setInterval(cambiarPalabras, 5000);
+</script>
