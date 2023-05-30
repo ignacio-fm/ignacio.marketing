@@ -1,5 +1,9 @@
 ---
+import Button from '../components/Button.astro';
 import Layout from '../layouts/Layout.astro';
+const posts = await Astro.glob('./posts/*.mdx');
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
+const latestPost = sortedPosts[0];
 ---
 
 <Layout
@@ -7,12 +11,29 @@ import Layout from '../layouts/Layout.astro';
 	pageDescription="Bienvenidos a mi blog personal, donde podrás conocerme un poco más y ver mis trabajos realizados."
 >
 
-	<section class="py-20">
-		<div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
+	<section class="w-full px-4 md:px-6 py-20 text-xl text-gray-800 leading-normal">
 			<h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-4xl md:text-6xl">
 				Marketing<br>
 				Specialist
 			</h1>
+	</section>
+
+	<section class="w-full px-4 md:px-6 pb-6 text-gray-800 leading-normal">
+		<div class="flex">
+			<div class="w-full lg:w-1/2">
+				<h1>{latestPost.frontmatter.postTitle}</h1>
+				<p>{latestPost.frontmatter.postDescription}</p>
+				<p>Publicado el {latestPost.frontmatter.publishedTime}</p>
+				<ul>
+					{latestPost.frontmatter.tags.map((tag) => (
+						<li>{tag}</li>
+						))}
+				</ul>
+				<Button url="./" text="Leer el artículo" attrs="" />
+			</div>
+			<div class="w-full lg:w-1/2">
+				<img class="" src={latestPost.frontmatter.postImage} alt={latestPost.frontmatter.postTitle}>
+			</div>
 		</div>
 	</section>
 	
