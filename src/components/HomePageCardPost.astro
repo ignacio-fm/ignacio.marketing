@@ -3,7 +3,7 @@ const posts = await Astro.glob('../pages/posts/*.mdx');
 const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
 const latestPost = sortedPosts[0];
 
-const { postTitle, postImage, postDescription, publishedTime, url, tags } = latestPost.frontmatter;
+const { postTitle, postImage, postDescription, publishedTime, tags } = latestPost.frontmatter;
 
 const date = new Date(publishedTime)
 const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -12,10 +12,10 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 
 <section class="w-full px-4 md:px-6 pb-6">
 
-    <a class="group" href={latestPost.url}>
+    <a class="group" href=`${latestPost.url}`>
         <div class="relative">
             <div
-                class=`relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border md:p-12 p-6 border-gray-200 rounded-lg md:max-w-xl group-hover:md:shadow-lg group-hover:-translate-y-3 after:content-[''] overflow-hidden rounded-lg bg-cover bg-no-repeat leading-normal min-h-fit bg-[url('${postImage}')] md:bg-[url('')]`
+                class={`relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border md:p-12 p-6 border-gray-200 rounded-lg md:max-w-xl group-hover:md:shadow-lg group-hover:-translate-y-3 overflow-hidden min-h-fit bg-no-repeat bg-cover bg-[url('${postImage}')]`}
             >
                 <div class="absolute inset-0 bg-gradient-to-r max-md:from-black/60 max-md:via-black/40 max-md:to-transparent"></div>
     
@@ -25,14 +25,16 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
                     <p class="mb-3 text-sm md:text-base">Publicado el {dateFormatted}</p>
                     <ul class="flex">
                         {tags.map((tag) => (
+                            <>
                             <li>
                                 <div class="me-2 backdrop-blur-sm max-md:bg-black/10 border rounded-md px-3 py-2">{tag}</div>
                             </li>
+                            </>
                         ))}
                     </ul>
                 </div>
             </div>
-            <img class="hidden md:block absolute group-hover:blur-md group-hover:opacity-80 ease-in-out transition-color duration-500 rounded-lg right-0 top-[50%] h-auto w-2/3 rotate-6 -z-10 overflow-hidden -translate-y-1/2" src={postImage} alt={postTitle} />
+            <img class="hidden md:block absolute group-hover:blur-md group-hover:opacity-80 ease-in-out transition-color duration-500 rounded-lg right-0 top-[50%] h-auto w-2/3 rotate-6 -z-10 overflow-hidden -translate-y-1/2" src={`${postImage}`} alt={`${postTitle}`} />
         </div>
     </a>
 
