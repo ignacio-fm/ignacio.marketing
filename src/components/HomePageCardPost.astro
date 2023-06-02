@@ -15,7 +15,8 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
     <a class="group" href=`${latestPost.url}`>
         <div class="relative">
             <div
-                class={`relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border md:p-12 p-6 border-gray-200 rounded-lg md:max-w-xl group-hover:md:shadow-lg group-hover:-translate-y-3 overflow-hidden min-h-fit bg-no-repeat bg-cover bg-[url('${postImage}')]`}
+                style={{'--image-url': `url(${postImage})`}}
+                class='relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border md:p-12 p-6 border-gray-200 rounded-lg md:max-w-xl group-hover:md:shadow-lg group-hover:-translate-y-3 overflow-hidden min-h-fit bg-no-repeat bg-cover max-md:bg-[image:var(--image-url)]'
             >
                 <div class="absolute inset-0 bg-gradient-to-r max-md:from-black/60 max-md:via-black/40 max-md:to-transparent"></div>
     
