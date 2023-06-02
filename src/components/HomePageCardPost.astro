@@ -14,9 +14,12 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
 
     <a class="group" href=`${latestPost.url}`>
         <div class="relative">
+            <div class="ease-in-out transition duration-500 md:absolute rounded-lg text-zinc-900 font-bold z-10 md:bg-white md:p-2 md:border md:border-gray-200 -translate-y-[50%] md:translate-x-12 group-hover:-translate-y-10">
+                Última publicación
+            </div>
             <div
                 style={{'--image-url': `url(${postImage})`}}
-                class='relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border md:p-12 p-6 border-gray-200 rounded-lg md:max-w-xl group-hover:md:shadow-lg group-hover:-translate-y-3 overflow-hidden min-h-fit bg-no-repeat bg-cover max-md:bg-[image:var(--image-url)]'
+                class='relative md:text-gray-900 text-white ease-in-out transition-all duration-500 bg-white/50 backdrop-blur-xl border border-gray-200 md:p-12 p-6 rounded-lg md:max-w-[50%] group-hover:md:shadow-lg group-hover:-translate-y-3 overflow-hidden min-h-fit bg-no-repeat bg-cover max-md:bg-[image:var(--image-url)]'
             >
                 <div class="absolute inset-0 bg-gradient-to-r max-md:from-black/60 max-md:via-black/40 max-md:to-transparent"></div>
     
@@ -35,7 +38,7 @@ const dateFormatted = date.toLocaleDateString('es-ES', options)
                     </ul>
                 </div>
             </div>
-            <img class="hidden md:block absolute group-hover:blur-md group-hover:opacity-80 ease-in-out transition-color duration-500 rounded-lg right-0 top-[50%] h-auto w-2/3 rotate-6 -z-10 overflow-hidden -translate-y-1/2" src={`${postImage}`} alt={`${postTitle}`} />
+            <img class="hidden md:block absolute ease-in-out transition-color duration-500 rounded-lg rotate-6 group-hover:rotate-12 top-[50%] group-hover:top-[45%] right-5 h-auto w-2/3 -z-10 -translate-y-1/2" src={`${postImage}`} alt={`${postTitle}`} />
         </div>
     </a>
 
