@@ -1,8 +1,13 @@
-<section class="w-full px-4 md:px-6 text-5xl md:text-6xl text-gray-800 leading-normal">
-    <h1 class="relative h-[150px] mt-10 mb-12 font-bold font-sans break-normal text-gray-900 md:text-6xl">
-        <span id="palabra1" class="absolute font-bold transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">Marketing</span><br>
-        <span id="palabra2" class="absolute font-bold transition-all duration-500 ease-in-out transform translate-y-0 opacity-100 bg-gradient-to-r from-green-500 via-sky-500 to-blue-500 text-transparent bg-clip-text animate-gradient">Specialist</span>
-    </h1>
+<section class="w-full px-4 md:px-6 text-gray-800">
+    <div class="flex items-center mt-10 mb-20 md:mb-40">
+      <span class="animate-float">
+        <img id="hero-image" src="/images/hero/marketing.svg" height="120" width="120" alt="Hero image" class="w-[80px] h-[80px] md:w-[120px] md:h-[120px] -rotate-6 object-cover me-5 transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">
+      </span>
+      <h1 class="relative h-[96px] md:h-[120px] font-bold font-sans break-normal text-gray-900 text-4xl md:text-6xl">
+          <span id="palabra1" class="absolute font-bold transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">Marketing</span><br>
+          <span id="palabra2" class="absolute font-bold transition-all duration-500 ease-in-out transform translate-y-0 opacity-100 bg-gradient-to-r from-green-500 via-sky-500 to-blue-500 text-transparent bg-clip-text animate-gradient">Specialist</span>
+      </h1>
+    </div>
 </section>
 
 <style is:global >
@@ -24,19 +29,38 @@
       background-position: 0% 50%;
     }
   }
+
+  .animate-float {
+    animation: animatefloat 3s ease-in-out infinite;
+  }
+
+  @keyframes animatefloat {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-5px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
 </style>
 
 <script is:inline>
     let palabras1 = ["Marketing", "Branding", "Design"];
-    let palabras2 = ["Specialist", "Lover", "Enthusiast"];
-    let index = 0;
+    let palabras2 = ["Specialist", "Lover", "Passionate"];
+    let imagenes = ["/images/hero/marketing.svg", "/images/hero/branding.svg", "/images/hero/design.svg"];
+    let index = -1;
 
-    function cambiarPalabras() {
+    function changeWords() {
       const palabra1 = document.getElementById('palabra1');
       const palabra2 = document.getElementById('palabra2');
+      const heroImage = document.getElementById('hero-image');
       palabra1.className = "absolute transition-all duration-500 ease-in-out transform -translate-y-12 opacity-0";
       palabra2.className = "absolute transition-all duration-500 ease-in-out transform -translate-y-12 opacity-0 bg-gradient-to-r from-green-500 via-sky-500 to-blue-500 text-transparent bg-clip-text animate-gradient";
-  
+      heroImage.className = "w-[80px] h-[80px] md:w-[120px] md:h-[120px] -rotate-6 object-cover me-5 transition-all duration-500 ease-in-out transform -translate-y-12 opacity-0";
+
       setTimeout(() => {
         index = (index + 1) % palabras1.length;
         palabra1.innerText = palabras1[index];
@@ -47,7 +71,13 @@
         palabra2.innerText = palabras2[index];
         palabra2.className = "absolute transition-all duration-500 ease-in-out transform translate-y-0 opacity-100 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-500 text-transparent bg-clip-text animate-gradient";
       }, 1000);
+
+      setTimeout(() => {
+        heroImage.src = imagenes[index];
+        heroImage.className = "w-[80px] h-[80px] md:w-[120px] md:h-[120px] -rotate-6 object-cover me-5 transition-all duration-500 ease-in-out transform translate-y-0 opacity-100"
+      }, 1500);
     }
 
-    setInterval(cambiarPalabras, 5000);
+    changeWords();
+    setInterval(changeWords, 7000);
 </script>
