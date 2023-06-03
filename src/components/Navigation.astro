@@ -1,6 +1,5 @@
 ---
-    const pathname = new URL(Astro.request.url).pathname;
-    const currentPath = pathname.slice(1);
+    const pathname = new URL(Astro.request.url).pathname.replace(/\/$/, "");
 ---
 
 <div id="progress-bar" class="h-1 z-50 top-0 relative" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), #fff 0);"></div>
@@ -8,7 +7,7 @@
     <div class="w-full md:max-w-6xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
 
         <div class="pl-4">
-            <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="../">
+            <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold" href="/">
                 Ignacio Fernández
             </a>
         </div>
@@ -26,7 +25,7 @@
             <ul class="list-reset lg:flex justify-end flex-1 items-center">
                 <li class="mr-3">
                     <a
-                        class={`${currentPath === "" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900"} inline-block py-2 px-4`}
+                        class={`${pathname === "" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900"} inline-block py-2 px-4`}
                         href="/"
                     >
                         Inicio
@@ -34,7 +33,7 @@
                 </li>
                 <li class="mr-3">
                     <a
-                        class={`${currentPath === "sobre-mi" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`}
+                        class={`${pathname === "/sobre-mi" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`}
                         href="/sobre-mi"
                     >
                         Sobre mí
@@ -42,7 +41,7 @@
                 </li>
                 <li class="mr-3">
                     <a
-                        class={`${currentPath === "blog" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`}
+                        class={`${pathname === "/blog" ? "text-gray-900 font-bold no-underline" : "text-gray-600 hover:text-gray-900 no-underline hover:text-underline"} inline-block py-2 px-4`}
                         href="/blog"
                     >
                         Blog
@@ -52,7 +51,6 @@
         </div>
     </div>
 </div>
-{currentPath}
 
 <script>
     // Variables to track scroll position
