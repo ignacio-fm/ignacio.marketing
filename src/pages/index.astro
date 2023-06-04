@@ -1,4 +1,5 @@
 ---
+import HomePageAboutMe from '../components/HomePageAboutMe.astro';
 import HomePageHero from '../components/HomePageHero.astro';
 import HomePagePostCard from '../components/HomePagePostCard.astro';
 import Layout from '../layouts/Layout.astro';
@@ -8,6 +9,9 @@ import Layout from '../layouts/Layout.astro';
 	pageTitle="Inicio - Ignacio Fernández"
 	pageDescription="Bienvenidos a mi blog personal, donde podrás conocerme un poco más y ver mis trabajos realizados."
 >
-	<HomePageHero />
+	<div class="flex flex-wrap items-center mt-20 mb-14 md:mb-20 lg:mt-10 lg:mb-44">
+		<HomePageHero />
+		<HomePageAboutMe />
+	</div>
 	<HomePagePostCard />
 </Layout>
