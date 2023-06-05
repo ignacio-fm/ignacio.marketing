@@ -9,8 +9,9 @@ export default class HomePageProjectsSlider extends Component {
       centerMode: true,
       infinite: true,
       lazyLoad: true,
+      swipeToSlide: true,
       slidesToShow: 3,
-      autoplay: false,
+      autoplay: true,
       autoplaySpeed: 2500,
       arrows: false,
       pauseOnHover: true,
@@ -39,7 +40,7 @@ export default class HomePageProjectsSlider extends Component {
           <Slider {...settings}>
             {projects.map((project, index) => (
               <div key={`${index}`}>
-                <a className="group" href={`${project.url}`}>
+                <a className="group outline-0" href={`${project.url}`}>
                   <img className={`${index % 2 === 0 ? evenProjectClasses : oddProjectClasses}`} src={`${project.frontmatter.projectImage}`} alt={`${project.frontmatter.projectTitle}`} />
                   <h3 className="text-center text-lg font-bold mt-2">{project.frontmatter.projectTitle}</h3>
                   <p className="text-center text-sm text-gray-500">{project.frontmatter.projectDescription}</p>
