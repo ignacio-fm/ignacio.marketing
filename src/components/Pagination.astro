@@ -3,56 +3,80 @@ const { length, currentUrl, currentPage, firstUrl, prevUrl, nextUrl, lastUrl } =
 const paginationList = Array.from({length: Number(length)}, (_, i) => i + 1);
 ---
 
-<nav aria-label="Blog pages" class="pagination pagination-default">
+<nav aria-label="Paginación" class="flex justify-center items-center gap-5">
     { firstUrl == currentUrl ? (
-        <span class="pagination__link disabled">
-            <i class="pi-angle-left"></i>
-            <i class="pi-angle-left"></i>
+        <span class="text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M11 7l-5 5l5 5"></path>
+                <path d="M17 7l-5 5l5 5"></path>
+            </svg>
         </span>
     ) : (
-        <a href={firstUrl} class="pagination__link">
-            <i class="pi-angle-left"></i>
-            <i class="pi-angle-left"></i>
+        <a href={firstUrl} class="text-sky-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M11 7l-5 5l5 5"></path>
+                <path d="M17 7l-5 5l5 5"></path>
+            </svg>
         </a>
     )}
 
     { prevUrl ? (
-        <a href={prevUrl} class="pagination__link">
-            <i class="pi-angle-left"></i>
+        <a href={prevUrl} class="text-sky-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M15 6l-6 6l6 6"></path>
+            </svg>
         </a>
     ) : (
-        <span class="pagination__link disabled">
-            <i class="pi-angle-left"></i>
+        <span class="text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M15 6l-6 6l6 6"></path>
+            </svg>
         </span>        
     )}
     
     {
         paginationList.map((num) => (
-            <a href={`${firstUrl}${num == 1 ? "" : '/'+(num)}`} class={`pagination__link ${currentPage == num ? "disabled active" : ""}`}>
+            <a href={`${firstUrl}${num == 1 ? "" : '/'+(num)}`} class={`p-2 text-center h-[40px] w-[40px] ${currentPage == num ? "border-sky-600 bg-sky-500 font-medium text-white rounded-full" : "hover:text-gray-700 hover:border-gray-700 text-gray-500"}`}>
                 {num}
             </a>
         ))
     }
 
     { !nextUrl ? (
-        <span class="pagination__link disabled">
-            <i class="pi-angle-right"></i>
+        <span class="text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+            </svg>
         </span>
     ) : (
-        <a href={nextUrl} class="pagination__link">
-            <i class="pi-angle-right"></i>
+        <a href={nextUrl} class="text-sky-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+            </svg>
         </a>
     )}
 
     { lastUrl == currentUrl ? (
-        <span class="pagination__link disabled">
-            <i class="pi-angle-right"></i>
-            <i class="pi-angle-right"></i>
+        <span class="pagination__link text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M7 7l5 5l-5 5"></path>
+                <path d="M13 7l5 5l-5 5"></path>
+            </svg>
         </span>
     ) : (
-        <a href={lastUrl} class="pagination__link">
-            <i class="pi-angle-right"></i>
-            <i class="pi-angle-right"></i>
+        <a href={lastUrl} class="text-sky-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M7 7l5 5l-5 5"></path>
+                <path d="M13 7l5 5l-5 5"></path>
+            </svg>
         </a>
     )}
     

@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import ProjectSummary from "../../components/ProjectSummary.astro";
+import Pagination from '../../components/Pagination.astro';
+
+const allProjects = await Astro.glob('./*.mdx');
+export async function getStaticPaths({ paginate }) {
+  const allProjects = await Astro.glob('./*.mdx');
+  const formattedProjects = allProjects.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
+
+  return paginate(formattedProjects, {
+    pageSize: 2,
+  })
+}
+const { page } = Astro.props;
+const pathname = new URL(Astro.request.url).pathname.split('/');
+const firstPath = pathname[1];
+---
+
+<Layout pageTitle="" pageDescription="">
+    <section class="container w-full md:max-w-6xl mx-auto my-10 md:my-28 px-4 md:px-6">
+        <ol>
+            {
+            page.data.map((project) => (
+                <li>
+                <ProjectSummary 
+                    url={project.url} 
+                    projectTitle={project.frontmatter.projectTitle} 
+                    projectDescription={project.frontmatter.projectDescription}
+                    projectImage={project.frontmatter.projectImage}
+                    publishedTime={project.frontmatter.publishedTime} 
+                />
+                </li>
+            ))
+            }
+        </ol>
+
+        {allProjects.length > 1 ? (
+            <div class="mt-4">
+            <Pagination
+                length={page.lastPage} 
+                currentUrl={page.url.current} 
+                currentPage={page.currentPage} 
+                firstUrl={`/${firstPath}`} 
+                prevUrl={page.url.prev} 
+                nextUrl={page.url.next} 
+                lastUrl={`/${firstPath}/${page.lastPage}`}
+            />
+            </div>
+        ) : null}
+    </section>
+</Layout>

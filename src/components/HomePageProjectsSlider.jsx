@@ -8,13 +8,19 @@ export default class HomePageProjectsSlider extends Component {
       infinite: true,
       lazyLoad: true,
       swipeToSlide: true,
-      slidesToShow: 3,
+      slidesToShow: 4,
       autoplay: true,
       autoplaySpeed: 2500,
       arrows: false,
       dots: false,
       pauseOnHover: true,
       responsive: [
+        {
+          breakpoint: 2048,
+          settings: {
+            slidesToShow: 3
+          }
+        },
         {
           breakpoint: 1024,
           settings: {

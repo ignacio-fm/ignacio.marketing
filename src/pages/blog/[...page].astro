@@ -1,16 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-import PostSummary from "../../layouts/PostSummaryLayout.astro";
+import PostSummary from "../../components/PostSummary.astro";
 import Pagination from '../../components/Pagination.astro';
 
-const allPosts = await Astro.glob('./*.md*');
+const allPosts = await Astro.glob('./*.mdx');
 export async function getStaticPaths({ paginate }) {
   const allPosts = await Astro.glob('./*.mdx');
   const formattedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
 
   return paginate(formattedPosts, {
-    pageSize: 1,
+    pageSize: 2,
   })
 }
 const { page } = Astro.props;
@@ -18,25 +18,23 @@ const pathname = new URL(Astro.request.url).pathname.split('/');
 const firstPath = pathname[1];
 ---
 
-<Layout pageTitle="" pageDescription="">
-    <section class="container w-full md:max-w-6xl mx-auto my-10 md:my-28 px-4 md:px-6">
-        <ol>
-            {
-            page.data.map((post) => (
-                <li>
-                <PostSummary 
-                    url={post.url} 
-                    postTitle={post.frontmatter.postTitle} 
-                    publishedTime={post.frontmatter.publishedTime} 
-                    postDescription={post.frontmatter.postDescription} 
-                    tags={post.frontmatter.tags}
-                />
-                </li>
-            ))
-            }
-        </ol>
+<Layout pageTitle="Blog" pageDescription="">
+    <section class="container w-full md:max-w-6xl mx-auto my-14 px-4 md:px-6">
+        <div>
+            {page.data.map((post, index) => (
+                <PostSummary
+                index={index}
+                url={post.url} 
+                postTitle={post.frontmatter.postTitle} 
+                postDescription={post.frontmatter.postDescription} 
+                postImage={post.frontmatter.postImage} 
+                publishedTime={post.frontmatter.publishedTime} 
+                tags={post.frontmatter.tags}
+            />
+            ))}
+        </div>
 
-        {allPosts.length > 1 ? (
+        {allPosts.length > 2 ? (
             <div class="mt-4">
             <Pagination
                 length={page.lastPage} 

@@ -1,0 +1,21 @@
+---
+const { projectTitle, url, projectImage, projectDescription, publishedTime } = Astro.props;
+
+const date = new Date(publishedTime)
+const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+const dateFormatted = date.toLocaleDateString('es-ES', options)
+---
+
+<div>
+  <div>
+    <img src={projectImage} alt={projectImage}>
+  </div>
+  <div>
+    <a href={url}>
+      <h2>{projectTitle}</h2>
+    </a>
+    <p>{projectDescription}</p>
+    <p>{dateFormatted}</p>
+    <a href={url} class="post-summary__action text--bold">Read More</a>
+  </div>
+</div>

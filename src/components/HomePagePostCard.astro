@@ -10,7 +10,7 @@ const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', da
 const dateFormatted = date.toLocaleDateString('es-ES', options)
 ---
 
-<a class="group" href=`${latestPost.url}`>
+<a class="group" href={latestPost.url}>
     <div class="relative">
         <div class="ease-in-out transition duration-500 md:absolute rounded-lg text-zinc-900 font-bold z-10 md:bg-white md:p-2 md:border md:border-gray-200 -translate-y-[50%] md:translate-x-12 group-hover:-translate-y-10">
             Última publicación
