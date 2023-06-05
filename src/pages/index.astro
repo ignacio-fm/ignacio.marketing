@@ -18,7 +18,7 @@ const projects = await Astro.glob('../pages/projects/*.mdx');
 		<HomePageHero />
 		<HomePageAboutMe />
 	</div>
-	<HomePageProjectsSlider client:load projects={projects} />
+	<HomePageProjectsSlider client:only="react" projects={projects} />
 	<div class="container w-full md:max-w-6xl mx-auto my-10 md:my-28">
 		<HomePagePostCard />
 	</div>

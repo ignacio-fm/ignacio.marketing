@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 
-class HomePageProjectsSlider extends Component {
+export default class HomePageProjectsSlider extends Component {
 
   render() {
     const settings = {
@@ -52,5 +52,3 @@ class HomePageProjectsSlider extends Component {
     );
   };
 };
-
-export default HomePageProjectsSlider;
