@@ -1,5 +1,5 @@
 ---
-const posts = await Astro.glob('../pages/posts/*.mdx');
+const posts = await Astro.glob('../pages/blog/*.mdx');
 const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
 const latestPost = sortedPosts[0];
 

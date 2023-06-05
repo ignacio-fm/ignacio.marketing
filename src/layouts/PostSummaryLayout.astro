@@ -1,0 +1,18 @@
+---
+const { postTitle, url, postImage, postDescription } = Astro.props;
+---
+
+<div>
+  <div>
+    <div>
+      <img src={postImage} alt={postImage}>
+    </div>
+    <div>
+      <a href={`/blog/${url}`}>
+        <h2>{postTitle}</h2>
+      </a>
+      <p>{postDescription}</p>
+      <a href={`/blog/${url}`} class="post-summary__action text--bold">Read More</a>
+    </div>
+  </div>
+</div>
