@@ -11,7 +11,7 @@ class HomePageProjectsSlider extends Component {
       lazyLoad: true,
       slidesToShow: 3,
       autoplay: false,
-      //autoplaySpeed: 2500,
+      autoplaySpeed: 2500,
       arrows: false,
       pauseOnHover: true,
       responsive: [
