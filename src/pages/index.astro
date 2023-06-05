@@ -2,8 +2,12 @@
 import HomePageAboutMe from '../components/HomePageAboutMe.astro';
 import HomePageHero from '../components/HomePageHero.astro';
 import HomePagePostCard from '../components/HomePagePostCard.astro';
-import HomePageProjectCard from '../components/HomePageProjectCard.astro';
+import HomePageProjectsSlider from '../components/HomePageProjectsSlider.jsx';
 import Layout from '../layouts/Layout.astro';
+
+import "slick-carousel/slick/slick.css";
+
+const projects = await Astro.glob('../pages/projects/*.mdx');
 ---
 
 <Layout
@@ -14,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
 		<HomePageHero />
 		<HomePageAboutMe />
 	</div>
-	<HomePageProjectCard />
+	<HomePageProjectsSlider client:load projects={projects} />
 	<div class="container w-full md:max-w-6xl mx-auto my-10 md:my-28">
 		<HomePagePostCard />
 	</div>
