@@ -5,8 +5,6 @@ export default class HomePageProjectsSlider extends Component {
 
   render() {
     const settings = {
-      className: "center",
-      centerMode: true,
       infinite: true,
       lazyLoad: true,
       swipeToSlide: true,
@@ -14,16 +12,17 @@ export default class HomePageProjectsSlider extends Component {
       autoplay: true,
       autoplaySpeed: 2500,
       arrows: false,
+      dots: false,
       pauseOnHover: true,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 3
+            slidesToShow: 2
           }
         },
         {
-          breakpoint: 767,
+          breakpoint: 680,
           settings: {
             slidesToShow: 1
           }
@@ -31,11 +30,14 @@ export default class HomePageProjectsSlider extends Component {
       ]
     };
     const { projects } = this.props;
-    const oddProjectClasses = "mt-5 mx-auto h-[200px] w-[400px] object-cover rounded-lg -rotate-3 group-hover:-rotate-1 transition-transform duration-500 ease-in-out";
-    const evenProjectClasses = "mt-5 mx-auto h-[200px] w-[400px] object-cover rounded-lg rotate-3 group-hover:rotate-1 transition-transform duration-500 ease-in-out";
+    const oddProjectClasses = "mt-5 mx-auto h-[200px] w-[300px] xl:w-[400px] object-cover rounded-lg -rotate-3 group-hover:-rotate-1 transition-transform duration-500 ease-in-out";
+    const evenProjectClasses = "mt-5 mx-auto h-[200px] w-[300px] xl:w-[400px] object-cover rounded-lg rotate-3 group-hover:rotate-1 transition-transform duration-500 ease-in-out";
 
     return (
-      <section className="w-full px-4 md:px-6 py-6">
+      <>
+        <div className="px-4 md:px-6">
+          <h3 className="text-center text-3xl font-bold tracking-tight my-6 md:mb-10">Mis proyectos</h3>
+        </div>
         <div>
           <Slider {...settings}>
             {projects.map((project, index) => (
@@ -49,7 +51,7 @@ export default class HomePageProjectsSlider extends Component {
             ))}
           </Slider>
         </div>
-      </section>
+      </>
     );
   };
 };
