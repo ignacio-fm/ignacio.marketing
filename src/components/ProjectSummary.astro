@@ -1,9 +1,9 @@
 ---
+import { formatDate } from '../utils';
+
 const { projectTitle, url, projectImage, projectDescription, publishedTime } = Astro.props;
 
-const date = new Date(publishedTime)
-const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-const dateFormatted = date.toLocaleDateString('es-ES', options)
+const dateFormatted = formatDate(publishedTime, 'es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <div>

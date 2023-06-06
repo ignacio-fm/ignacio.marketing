@@ -1,13 +1,13 @@
 ---
+import { formatDate } from '../utils';
+
 const posts = await Astro.glob('../pages/blog/*.mdx');
 const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
 const latestPost = sortedPosts[0];
 
 const { postTitle, postImage, postDescription, publishedTime, tags } = latestPost.frontmatter;
 
-const date = new Date(publishedTime)
-const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-const dateFormatted = date.toLocaleDateString('es-ES', options)
+const dateFormatted = formatDate(publishedTime, 'es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <a class="group" href={latestPost.url}>
