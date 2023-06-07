@@ -7,26 +7,30 @@ const dateFormatted = formatDate(publishedTime, 'es-ES', { year: 'numeric', mont
 
 const conditionalClasses = {
     container: index % 2 === 0 ? "" : "md:flex-row-reverse",
-    image: index % 2 === 0 ? "md:rounded-l-lg" : "md:rounded-r-lg"
+    image: index % 2 === 0 ? "md:rounded-l-lg" : "md:rounded-r-lg",
+    tags: index % 2 === 0 ? "left-0 [&>*>li]:ms-5" : "left-0 md:left-auto md:right-0 [&>*>li]:ms-5 md:[&>*>li]:ms-0 md:[&>*>li]:me-5"
 };
 ---
 
-<a href={url} class={`group flex flex-col items-stretch bg-white border border-gray-200 rounded-lg shadow md:flex-row mb-20 ${conditionalClasses.container}`}>
-    <div class=`md:w-1/2 overflow-hidden rounded-lg md:rounded-none ${conditionalClasses.image}`>
-        <img class="transform transition-transform duration-500 group-hover:scale-105 object-cover w-full h-full rounded-lg md:rounded-none" src={postImage} alt={postTitle}>
+<a href={url} class={`group flex flex-col items-stretch bg-white border border-gray-200 rounded-lg md:flex-row mb-10 ${conditionalClasses.container}`}>
+    <div class=`relative md:w-1/2 overflow-hidden rounded-t-lg md:rounded-none ${conditionalClasses.image}`>
+        <img class="transform transition-transform duration-500 group-hover:scale-105 object-cover w-full h-full" src={postImage} alt={postTitle}>
+        <div class=`absolute mt-5 top-0 ${conditionalClasses.tags}`>
+            <ul class="flex">
+                {tags.map((tag) => (
+                    <li class="backdrop-blur-sm max-md:bg-black/10 bg-black/5 text-white font-medium border rounded-md px-3 py-2">
+                        {tag}
+                    </li>
+                ))}
+            </ul>
+        </div>
     </div>
 
-    <div class="p-12 leading-normal text-left md:w-1/2">
+    <div class="p-6 md:p-12 leading-normal text-left md:w-1/2">
         <h3 class="mb-2 md:mb-5 text-2xl md:text-4xl font-bold tracking-tight">{postTitle}</h3>
-        <p class="mb-3 font-medium md:text-lg">{postDescription}</p>
         <p class="mb-3 text-sm md:text-base">Publicado el {dateFormatted}</p>
-        <ul class="flex">
-            {tags.map((tag) => (
-                <li class="me-2 backdrop-blur-sm max-md:bg-black/10 border rounded-md px-3 py-2">
-                    {tag}
-                </li>
-            ))}
-        </ul>
+        <hr class="mb-3 border-1 border-gray-200">
+        <p class="font-normal md:text-lg">{postDescription}</p>
     </div>
 </a>
 
