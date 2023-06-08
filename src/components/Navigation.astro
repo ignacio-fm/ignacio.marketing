@@ -3,7 +3,7 @@
 ---
 
 <div id="progress-bar" class="h-1 z-50 top-0 relative" style="background:linear-gradient(to right, #3b82f6 var(--scroll), #fff 0);"></div>
-<div id="nav-container" class="transition duration-500 ease-in-out transform translate-y-0 z-20">
+<div id="nav-container" class="transition duration-500 ease-in-out transform translate-y-0 z-20 backdrop-blur-xl">
     <div class="w-full md:max-w-6xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
 
         <div class="pl-4">
@@ -78,10 +78,12 @@
     // Function to toggle classes based on scroll position
     const toggleHeaderShadowOnScroll = scrollpos => {
         const scrollPassed = scrollpos > 10;
-        navContainer.classList.toggle("bg-white", scrollPassed);
+        navContainer.classList.toggle("bg-white/50", scrollPassed);
         navContainer.classList.toggle("shadow", scrollPassed);
+        navContainer.classList.toggle("border-b", scrollPassed);
+        navContainer.classList.toggle("border-gray-200", scrollPassed);
         navContent.classList.toggle("bg-gray-100", !scrollPassed);
-        navContent.classList.toggle("bg-white", scrollPassed);
+        navContent.classList.toggle("bg-white/50", scrollPassed);
     };
 
     // Function to hide or show menu based on scroll direction
