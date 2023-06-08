@@ -23,14 +23,14 @@ const firstPath = pathname[1];
         <div class="pt-20">
             {page.data.map((post, index) => (
                 <PostSummary
-                index={index}
-                url={post.url} 
-                postTitle={post.frontmatter.postTitle} 
-                postDescription={post.frontmatter.postDescription} 
-                postImage={post.frontmatter.postImage} 
-                publishedTime={post.frontmatter.publishedTime} 
-                tags={post.frontmatter.tags}
-            />
+                    index={index}
+                    url={post.url} 
+                    postTitle={post.frontmatter.postTitle} 
+                    postDescription={post.frontmatter.postDescription} 
+                    postImage={post.frontmatter.postImage} 
+                    publishedTime={post.frontmatter.publishedTime} 
+                    tags={post.frontmatter.tags}
+                />
             ))}
         </div>
 

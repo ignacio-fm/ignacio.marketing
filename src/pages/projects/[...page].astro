@@ -10,7 +10,7 @@ export async function getStaticPaths({ paginate }) {
   const formattedProjects = allProjects.sort((a, b) => new Date(b.frontmatter.publishedTime).getTime() - new Date(a.frontmatter.publishedTime).getTime());
 
   return paginate(formattedProjects, {
-    pageSize: 2,
+    pageSize: 6,
   })
 }
 const { page } = Astro.props;
@@ -18,35 +18,35 @@ const pathname = new URL(Astro.request.url).pathname.split('/');
 const firstPath = pathname[1];
 ---
 
-<Layout pageTitle="" pageDescription="">
-    <section class="container w-full md:max-w-6xl mx-auto my-10 md:my-28 px-4 md:px-6">
-        <ol>
-            {
-            page.data.map((project) => (
-                <li>
-                <ProjectSummary 
+<Layout pageTitle="Blog" pageDescription="">
+    <section class="container w-full md:max-w-6xl mx-auto my-14 px-4 md:px-6">
+        <div class="pt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7 lg:gap-10">
+            {page.data.map((project, index) => (
+                <ProjectSummary
+                    index={index}
                     url={project.url} 
                     projectTitle={project.frontmatter.projectTitle} 
-                    projectDescription={project.frontmatter.projectDescription}
-                    projectImage={project.frontmatter.projectImage}
+                    projectDescription={project.frontmatter.projectDescription} 
+                    projectImage={project.frontmatter.projectImage} 
                     publishedTime={project.frontmatter.publishedTime} 
+                    techs={project.frontmatter.techs}
+                    langs={project.frontmatter.langs}
+                    outreaches={project.frontmatter.outreaches}
                 />
-                </li>
-            ))
-            }
-        </ol>
+            ))}
+        </div>
 
-        {allProjects.length > 1 ? (
-            <div class="mt-4">
-            <Pagination
-                length={page.lastPage} 
-                currentUrl={page.url.current} 
-                currentPage={page.currentPage} 
-                firstUrl={`/${firstPath}`} 
-                prevUrl={page.url.prev} 
-                nextUrl={page.url.next} 
-                lastUrl={`/${firstPath}/${page.lastPage}`}
-            />
+        {allProjects.length > 6 ? (
+            <div class="mt-14">
+                <Pagination
+                    length={page.lastPage} 
+                    currentUrl={page.url.current} 
+                    currentPage={page.currentPage} 
+                    firstUrl={`/${firstPath}`} 
+                    prevUrl={page.url.prev} 
+                    nextUrl={page.url.next} 
+                    lastUrl={`/${firstPath}/${page.lastPage}`}
+                />
             </div>
         ) : null}
     </section>

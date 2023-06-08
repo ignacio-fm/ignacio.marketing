@@ -1,21 +1,43 @@
 ---
 import { formatDate } from '../utils';
 
-const { projectTitle, url, projectImage, projectDescription, publishedTime } = Astro.props;
+const { projectTitle, url, projectImage, projectDescription, publishedTime, techs, langs, outreaches, index } = Astro.props;
 
 const dateFormatted = formatDate(publishedTime, 'es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<div>
-  <div>
-    <img src={projectImage} alt={projectImage}>
-  </div>
-  <div>
-    <a href={url}>
-      <h2>{projectTitle}</h2>
-    </a>
-    <p>{projectDescription}</p>
-    <p>{dateFormatted}</p>
-    <a href={url} class="post-summary__action text--bold">Read More</a>
-  </div>
-</div>
+<a href={url} class="group flex flex-col items-stretch bg-white border border-gray-200 rounded-lg max-sm:mb-8">
+    <div class="relative overflow-hidden rounded-t-lg">
+        <img class="transform transition-transform duration-500 group-hover:scale-105 object-cover w-full h-full" src={projectImage} alt={projectTitle}>
+        <div class="absolute mt-5 top-0 left-0 [&>*>li]:ms-5">
+            <ul class="flex">
+                {techs.map((tech) => (
+                    <li class="backdrop-blur-sm bg-black/10 text-white font-medium border rounded-md px-3 py-2">
+                        {tech}
+                    </li>
+                ))}
+            </ul>
+            <ul class="flex">
+                {langs.map((lang) => (
+                    <li class="backdrop-blur-sm bg-black/10 text-white font-medium border rounded-md px-3 py-2">
+                        {lang}
+                    </li>
+                ))}
+            </ul>
+            <ul class="flex">
+                {outreaches.map((outreach) => (
+                    <li class="backdrop-blur-sm bg-black/10 text-white font-medium border rounded-md px-3 py-2">
+                        {outreach}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+
+    <div class="p-6 md:p-12 leading-normal text-left">
+        <h3 class="mb-2 md:mb-5 text-2xl md:text-4xl font-bold tracking-tight">{projectTitle}</h3>
+        <p class="mb-3 text-sm md:text-base">Publicado el {dateFormatted}</p>
+        <hr class="mb-3 border-1 border-gray-200">
+        <p class="font-normal md:text-lg">{projectDescription}</p>
+    </div>
+</a>

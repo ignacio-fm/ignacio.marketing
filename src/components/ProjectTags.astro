@@ -1,0 +1,13 @@
+---
+const { tags } = Astro.props;
+---
+
+<div class="text-base md:text-sm text-gray-500 px-4 py-6">
+    Etiquetas: 
+    {tags.map((tag, index) => (
+        <>
+        <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">{tag}</a>
+        {index < tags.length - 1 && ' . '}
+        </>
+    ))}
+</div>
